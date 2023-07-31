@@ -51,7 +51,7 @@ const testHTML3 = `
 `
 
 test('found all links at https://testsite1.com', () => {
-    expect(getURLsFromHTML(testHTML1, 'https://testsite1.com')).toBe([
+    expect(getURLsFromHTML(testHTML1, 'https://testsite1.com')).toStrictEqual([
         'https://testsite1.com/recipes/kwama-egg-quiche.html',
         'https://testsite1.com/recipes/wickwheat-toast.html',
         'https://testsite1.com/recipes/the-hound-and-rat.html'
@@ -59,7 +59,7 @@ test('found all links at https://testsite1.com', () => {
 })
 
 test('found all links at https://testsite2.com', () => {
-    expect(getURLsFromHTML(testHTML2, 'https://testsite2.com')).toBe([
+    expect(getURLsFromHTML(testHTML2, 'https://testsite2.com')).toStrictEqual([
         'https://testsite2.com/recipes/kwama-egg-quiche.html',
         'https://testsite2.com/recipes/wickwheat-toast.html',
         'https://testsite2.com/recipes/the-hound-and-rat.html'
@@ -67,7 +67,7 @@ test('found all links at https://testsite2.com', () => {
 })
 
 test('found all links at https://testsite3.com', () => {
-    expect(getURLsFromHTML(testHTML3, 'https://testsite1.com')).toBe([
+    expect(getURLsFromHTML(testHTML3, 'https://testsite3.com')).toStrictEqual([
         'https://testsite3.com/recipes/kwama-egg-quiche.html',
         'https://testsite3.com/recipes/wickwheat-toast.html',
         'https://testsite3.com/recipes/the-hound-and-rat.html'
