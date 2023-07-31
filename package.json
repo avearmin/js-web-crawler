@@ -1,0 +1,15 @@
+{
+  "name": "js-web-crawler",
+  "version": "1.0.0",
+  "description": "A Web Crawler built with JavaScript using Node.js.",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.6.2"
+  }
+}
