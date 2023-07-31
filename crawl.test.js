@@ -45,8 +45,8 @@ const testHTML2 = `
 const testHTML3 = `
     <ul> 
     <li><a href="https://testsite3.com/recipes/kwama-egg-quiche.html">Kwama Egg Quiche</a></li>
-    <li><a href="./recipes/wickwheat-toast.html">Wickwheat Toast</a></li>
-    <li><a href="./recipes/the-hound-and-rat.html">The Hound and Rat</a></li>
+    <li><a href="/recipes/wickwheat-toast.html">Wickwheat Toast</a></li>
+    <li><a href="/recipes/the-hound-and-rat.html">The Hound and Rat</a></li>
     </ul>
 `
 

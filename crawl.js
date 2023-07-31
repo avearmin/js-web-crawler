@@ -24,8 +24,23 @@ function normalizeURL(url) {
     return normalizedURL
 }
 
-function getURLsFromHTML(htmlBody, baseURL) {
+function getAbsoluteURLFromElement(element, baseURL) {
+    let url = element.getAttribute('href')
+    if (!(url.includes(baseURL))) {
+        let startIndex = 0
+        if (url.charAt(0) === '.') {
+            startIndex = 1
+        }
+        url = baseURL + url.substring(startIndex, url.length)
+    }
+    return url  
+}
 
+function getURLsFromHTML(htmlBody, baseURL) {
+    const dom = new JSDOM(htmlBody)
+    const elements =  Array.from(dom.window.document.querySelectorAll('a'))
+    const URLs =  elements.map(element => getAbsoluteURLFromElement(element, baseURL))
+    return URLs
 }
 
 module.exports = {
