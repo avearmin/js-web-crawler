@@ -1,3 +1,5 @@
+const { JSDOM } = require('jsdom')
+
 function removeAllTrailingSlashes(str) {
     if (str.length === 1) { // Handles the case where the str is a single trailing slash
         return str
@@ -22,6 +24,11 @@ function normalizeURL(url) {
     return normalizedURL
 }
 
+function getURLsFromHTML(htmlBody, baseURL) {
+
+}
+
 module.exports = {
-    normalizeURL
+    normalizeURL,
+    getURLsFromHTML
 }
