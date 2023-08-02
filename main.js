@@ -7,7 +7,9 @@ async function main() {
         return
     }
     console.log(`Crawling: ${arguments[2]}`)
-    const html = await crawlPage(arguments[2])
+    const pages = {}
+    await crawlPage(arguments[2], arguments[2], pages)
+    console.log(pages)
 }
 
 main()

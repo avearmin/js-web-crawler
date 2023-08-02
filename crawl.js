@@ -43,7 +43,27 @@ function getURLsFromHTML(htmlBody, baseURL) {
     return URLs
 }
 
-async function crawlPage(baseURL) {
+async function crawlPage(baseURL, currentURL, pages) {
+    try {
+        const baseURlObj = new URL(baseURL)
+        const currentURLObj = new URL(currentURL)
+        if (baseURlObj.hostname !== currentURLObj.hostname) {
+            return pages
+    }
+        const normalizedCurrentURL = normalizeURL(currentURL)
+        if (normalizedCurrentURL in pages) {
+            pages[normalizedCurrentURL]++
+            return pages
+    }
+        if (currentURL === baseURL) {
+            pages[normalizedCurrentURL] = 0
+        } else {
+            pages[normalizedCurrentURL] = 1
+        }
+    } catch (error) {
+        console.log(`Error: Invalid URL '${currentURL}'`)
+    }
+    
     try {
         const response = await fetch(baseURL, {
             method: 'GET',
@@ -53,17 +73,22 @@ async function crawlPage(baseURL) {
             }
         })
         if (!response.ok) {
-            console.log('Error: Couldn\'t fetch HTML')
-            return
+            console.log(`Error: Couldn\'t fetch HTML from ${currentURL}`)
+            return pages
         }
         if (response.headers.get('Content-Type').indexOf('text/html') === -1) {
-            console.log('Error: Content-Type is not HTML')
-            return
+            console.log(`Error: Content-Type from ${currentURL} is not HTML`)
+            return pages
         }
-        return await response.text()
+        const html = await response.text()
+        const links = getURLsFromHTML(html, baseURL)
+        for (const link of links) {
+            crawlPage(baseURL, link, pages)
+        }
     } catch (error) {
         console.log(error)
     }
+    return pages
 }
 
 module.exports = {
