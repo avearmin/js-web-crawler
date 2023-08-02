@@ -44,24 +44,23 @@ function getURLsFromHTML(htmlBody, baseURL) {
 }
 
 async function crawlPage(baseURL, currentURL, pages) {
-    try {
-        const baseURlObj = new URL(baseURL)
-        const currentURLObj = new URL(currentURL)
-        if (baseURlObj.hostname !== currentURLObj.hostname) {
-            return pages
+    if (currentURL.charAt(0) == '#') { // These are not valid URLs to visit
+        return pages
     }
-        const normalizedCurrentURL = normalizeURL(currentURL)
-        if (normalizedCurrentURL in pages) {
-            pages[normalizedCurrentURL]++
-            return pages
+    const baseURlObj = new URL(baseURL)
+    const currentURLObj = new URL(currentURL)
+    if (baseURlObj.hostname !== currentURLObj.hostname) {
+        return pages
     }
-        if (currentURL === baseURL) {
-            pages[normalizedCurrentURL] = 0
-        } else {
-            pages[normalizedCurrentURL] = 1
-        }
-    } catch (error) {
-        console.log(`Error: Invalid URL '${currentURL}'`)
+    const normalizedCurrentURL = normalizeURL(currentURL)
+    if (normalizedCurrentURL in pages) {
+        pages[normalizedCurrentURL]++
+        return pages
+    }
+    if (currentURL === baseURL) {
+        pages[normalizedCurrentURL] = 0
+    } else {
+        pages[normalizedCurrentURL] = 1
     }
     
     try {
